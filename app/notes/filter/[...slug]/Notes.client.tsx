@@ -31,9 +31,6 @@ const NotesClient = ({ tag }: NotesClientProps) => {
     setSearch(value);
     setPage(1);
   }, 800);
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
 
   useEffect(() => {
     if (isError) {
@@ -60,6 +57,7 @@ const NotesClient = ({ tag }: NotesClientProps) => {
         {isError && (
           <>
             <div>Something wrong...</div>
+            <p>{error.message}</p>
           </>
         )}
         {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}

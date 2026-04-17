@@ -12,16 +12,16 @@ import Pagination from '@/components/Pagination/Pagination';
 import Link from 'next/link';
 
 interface NotesClientProps {
-  initialTag: string | undefined;
+  tag: string | undefined;
 }
 
-const NotesClient = ({ initialTag }: NotesClientProps) => {
+const NotesClient = ({ tag }: NotesClientProps) => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
 
   const { data, isLoading, isError, isSuccess, error } = useQuery({
-    queryKey: ['notes', search, page, initialTag],
-    queryFn: () => fetchNotes({ search, page, tag: initialTag }),
+    queryKey: ['notes', search, page, tag],
+    queryFn: () => fetchNotes({ search, page, tag: tag }),
     refetchOnMount: false,
     placeholderData: keepPreviousData,
     staleTime: 5 * 60 * 1000,
@@ -63,7 +63,7 @@ const NotesClient = ({ initialTag }: NotesClientProps) => {
           </>
         )}
         {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-        {isSuccess && data.notes.length === 0 && <p>No movies found for your request.</p>}
+        {isSuccess && data.notes.length === 0 && <p>Notes not found for your request.</p>}
       </div>
     </>
   );

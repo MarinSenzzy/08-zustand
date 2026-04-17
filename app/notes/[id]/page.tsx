@@ -2,8 +2,6 @@ import { fetchOneNote } from '@/lib/api';
 import NoteDetailsClient from './NoteDetails.client';
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import css from './NoteDetails.module.css';
-import { sidebarTags } from '../filter/@sidebar/default';
-import { NoteTag } from '@/types/note';
 import { Metadata } from 'next';
 
 type Props = {

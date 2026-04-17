@@ -21,11 +21,11 @@ interface FetchNotesProps {
   page: number;
 }
 
-interface CreateNoteProps {
+export type CreateNoteProps = {
   title: string;
   content: string;
   tag: Note['tag'];
-}
+};
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;

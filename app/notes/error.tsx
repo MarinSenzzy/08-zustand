@@ -9,7 +9,7 @@ const Error = ({ error, reset }: Props) => {
   return (
     <>
       <p>Could not fetch the list of notes. {error.message}</p>
-      <button onClick={reset}>Спробувати знову</button>
+      <button onClick={reset}>Try again</button>
     </>
   );
 };

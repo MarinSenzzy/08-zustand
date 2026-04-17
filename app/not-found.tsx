@@ -1,4 +1,27 @@
 import css from './Home.module.css';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '404- NoteHub',
+  description:
+    'Unfortunately, the page you requested does not exist. Please return to the NoteHub homepage to continue creating notes.',
+  openGraph: {
+    title: '404- NoteHub',
+    description:
+      'Unfortunately, the page you requested does not exist. Please return to the NoteHub homepage to continue creating notes.',
+    url: '/404',
+    siteName: 'NoteHub',
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'NoteHub-images-logo',
+      },
+    ],
+    type: 'website',
+  },
+};
 
 const NotFound = () => {
   return (

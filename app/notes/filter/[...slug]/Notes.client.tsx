@@ -11,6 +11,7 @@ import css from './NotesPage.module.css';
 import { fetchNotes } from '@/lib/api';
 import Pagination from '@/components/Pagination/Pagination';
 import Modal from '@/components/Modal/Modal';
+import Link from 'next/link';
 
 interface NotesClientProps {
   initialTag: string | undefined;
@@ -19,11 +20,11 @@ interface NotesClientProps {
 const NotesClient = ({ initialTag }: NotesClientProps) => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
+  // const openModal = () => setIsModalOpen(true);
 
-  const closeModal = () => setIsModalOpen(false);
+  // const closeModal = () => setIsModalOpen(false);
   const { data, isLoading, isError, isSuccess, error } = useQuery({
     queryKey: ['notes', search, page, initialTag],
     queryFn: () => fetchNotes({ search, page, tag: initialTag }),
@@ -56,9 +57,13 @@ const NotesClient = ({ initialTag }: NotesClientProps) => {
           )}
 
           {
-            <button className={css.button} onClick={openModal}>
+            <Link
+              href={'/notes/action/create'}
+              className={css.button}
+              // onClick={openModal}
+            >
               Create note +
-            </button>
+            </Link>
           }
         </header>
         {isLoading && <div>Loading posts...</div>}
@@ -71,11 +76,11 @@ const NotesClient = ({ initialTag }: NotesClientProps) => {
         {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
         {isSuccess && data.notes.length === 0 && <p>No movies found for your request.</p>}
       </div>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal onClose={closeModal}>
           <NoteForm onClose={closeModal} />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };

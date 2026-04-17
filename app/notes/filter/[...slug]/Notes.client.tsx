@@ -5,12 +5,10 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 
 import NoteList from '@/components/NoteList/NoteList';
-import NoteForm from '@/components/NoteForm/NoteForm';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import css from './NotesPage.module.css';
 import { fetchNotes } from '@/lib/api';
 import Pagination from '@/components/Pagination/Pagination';
-import Modal from '@/components/Modal/Modal';
 import Link from 'next/link';
 
 interface NotesClientProps {
@@ -20,11 +18,7 @@ interface NotesClientProps {
 const NotesClient = ({ initialTag }: NotesClientProps) => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const openModal = () => setIsModalOpen(true);
-
-  // const closeModal = () => setIsModalOpen(false);
   const { data, isLoading, isError, isSuccess, error } = useQuery({
     queryKey: ['notes', search, page, initialTag],
     queryFn: () => fetchNotes({ search, page, tag: initialTag }),
@@ -57,11 +51,7 @@ const NotesClient = ({ initialTag }: NotesClientProps) => {
           )}
 
           {
-            <Link
-              href={'/notes/action/create'}
-              className={css.button}
-              // onClick={openModal}
-            >
+            <Link href={'/notes/action/create'} className={css.button}>
               Create note +
             </Link>
           }
@@ -70,17 +60,11 @@ const NotesClient = ({ initialTag }: NotesClientProps) => {
         {isError && (
           <>
             <div>Something wrong...</div>
-            {/* <p>{error.message}</p> */}
           </>
         )}
         {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
         {isSuccess && data.notes.length === 0 && <p>No movies found for your request.</p>}
       </div>
-      {/* {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )} */}
     </>
   );
 };

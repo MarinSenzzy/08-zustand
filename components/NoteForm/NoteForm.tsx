@@ -7,10 +7,6 @@ import { useRouter } from 'next/navigation';
 import { sidebarTags } from '@/lib/tags';
 import { useNoteStore } from '@/lib/store/noteStore';
 
-// interface NoteFormProps {
-//   onClose: () => void;
-// }
-
 const NoteForm = () => {
   const router = useRouter();
 
@@ -40,20 +36,10 @@ const NoteForm = () => {
   });
 
   const handleAction = (formData: FormData) => {
-    // const data = {
-    //   title: formData.get('title') as string,
-    //   content: formData.get('content') as string,
-    //   tag: formData.get('tag') as Note['tag'],
-    // };
     const data = Object.fromEntries(formData) as CreateNoteProps;
     mutate(data);
   };
 
-  // const handleSubmit = (values: NoteFormValues, actions: FormikHelpers<NoteFormValues>) => {
-  //   mutate(values);
-  //   console.log('Order data:', values);
-  //   actions.resetForm();
-  // };
   return (
     <>
       <form action={handleAction} className={css.form}>
@@ -96,11 +82,6 @@ const NoteForm = () => {
                 {tag}
               </option>
             ))}
-            {/* <option value="Todo">Todo</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Meeting">Meeting</option>
-            <option value="Shopping">Shopping</option> */}
           </select>
         </div>
 
